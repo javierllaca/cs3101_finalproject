@@ -13,7 +13,6 @@
 		E1C3839E190485A500A465EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C3839D190485A500A465EE /* CoreData.framework */; };
 		E1C383A4190485A500A465EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C383A2190485A500A465EE /* InfoPlist.strings */; };
 		E1C383A6190485A500A465EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383A5190485A500A465EE /* main.m */; };
-		E1C383AA190485A500A465EE /* JLOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383A9190485A500A465EE /* JLOAppDelegate.m */; };
 		E1C383AD190485A500A465EE /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1C383AB190485A500A465EE /* Notes.xcdatamodeld */; };
 		E1C383AF190485A500A465EE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1C383AE190485A500A465EE /* Images.xcassets */; };
 		E1C383B6190485A500A465EE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C383B5190485A500A465EE /* XCTest.framework */; };
@@ -22,6 +21,9 @@
 		E1C383B9190485A500A465EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C3839D190485A500A465EE /* CoreData.framework */; };
 		E1C383C1190485A500A465EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1C383BF190485A500A465EE /* InfoPlist.strings */; };
 		E1C383C3190485A500A465EE /* NotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383C2190485A500A465EE /* NotesTests.m */; };
+		E1C383D11904868E00A465EE /* JLOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383CD1904868E00A465EE /* JLOAppDelegate.m */; };
+		E1C383D21904868E00A465EE /* JLOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383CF1904868E00A465EE /* JLOViewController.m */; };
+		E1C383D31904868E00A465EE /* JLOViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C383D01904868E00A465EE /* JLOViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +46,6 @@
 		E1C383A3190485A500A465EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1C383A5190485A500A465EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1C383A7190485A500A465EE /* Notes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Notes-Prefix.pch"; sourceTree = "<group>"; };
-		E1C383A8190485A500A465EE /* JLOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLOAppDelegate.h; sourceTree = "<group>"; };
-		E1C383A9190485A500A465EE /* JLOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLOAppDelegate.m; sourceTree = "<group>"; };
 		E1C383AC190485A500A465EE /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 		E1C383AE190485A500A465EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E1C383B4190485A500A465EE /* NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +53,11 @@
 		E1C383BE190485A500A465EE /* NotesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotesTests-Info.plist"; sourceTree = "<group>"; };
 		E1C383C0190485A500A465EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1C383C2190485A500A465EE /* NotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotesTests.m; sourceTree = "<group>"; };
+		E1C383CC1904868E00A465EE /* JLOAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOAppDelegate.h; sourceTree = "<group>"; };
+		E1C383CD1904868E00A465EE /* JLOAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOAppDelegate.m; sourceTree = "<group>"; };
+		E1C383CE1904868E00A465EE /* JLOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOViewController.h; sourceTree = "<group>"; };
+		E1C383CF1904868E00A465EE /* JLOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOViewController.m; sourceTree = "<group>"; };
+		E1C383D01904868E00A465EE /* JLOViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JLOViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +120,11 @@
 		E1C3839F190485A500A465EE /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				E1C383A8190485A500A465EE /* JLOAppDelegate.h */,
-				E1C383A9190485A500A465EE /* JLOAppDelegate.m */,
+				E1C383CC1904868E00A465EE /* JLOAppDelegate.h */,
+				E1C383CD1904868E00A465EE /* JLOAppDelegate.m */,
+				E1C383CE1904868E00A465EE /* JLOViewController.h */,
+				E1C383CF1904868E00A465EE /* JLOViewController.m */,
+				E1C383D01904868E00A465EE /* JLOViewController.xib */,
 				E1C383AE190485A500A465EE /* Images.xcassets */,
 				E1C383AB190485A500A465EE /* Notes.xcdatamodeld */,
 				E1C383A0190485A500A465EE /* Supporting Files */,
@@ -231,6 +239,7 @@
 			files = (
 				E1C383A4190485A500A465EE /* InfoPlist.strings in Resources */,
 				E1C383AF190485A500A465EE /* Images.xcassets in Resources */,
+				E1C383D31904868E00A465EE /* JLOViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,8 +258,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1C383AA190485A500A465EE /* JLOAppDelegate.m in Sources */,
+				E1C383D11904868E00A465EE /* JLOAppDelegate.m in Sources */,
 				E1C383AD190485A500A465EE /* Notes.xcdatamodeld in Sources */,
+				E1C383D21904868E00A465EE /* JLOViewController.m in Sources */,
 				E1C383A6190485A500A465EE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
