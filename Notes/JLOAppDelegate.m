@@ -7,7 +7,7 @@
 //
 
 #import "JLOAppDelegate.h"
-#import "JLOViewController.h"
+#import "JLOHomeViewController.h"
 
 @implementation JLOAppDelegate
 
@@ -18,8 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    JLOViewController *vc = [[JLOViewController alloc] init];
-    self.window.rootViewController = vc;
+    JLOHomeViewController *vc = [[JLOHomeViewController alloc] init];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nc;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

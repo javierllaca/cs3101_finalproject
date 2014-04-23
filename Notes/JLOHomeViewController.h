@@ -1,5 +1,5 @@
 //
-//  JLOViewController.h
+//  JLOHomeViewController.h
 //  Note-Taker
 //
 //  Created by Javier Llaca on 4/20/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JLOViewController : UIViewController
+@interface JLOHomeViewController : UIViewController
 
 @end
