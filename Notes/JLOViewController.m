@@ -7,6 +7,7 @@
 //
 
 #import "JLOViewController.h"
+#import "JLONote.h"
 
 @interface JLOViewController ()
 
@@ -26,7 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    JLONote *note = [[JLONote alloc] init];
+    NSLog(@"\nNote date: %@", [note date]);
 }
 
 - (void)didReceiveMemoryWarning

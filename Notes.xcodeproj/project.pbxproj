@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E137537E19048A7C00B51B7F /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = E137537919048A7C00B51B7F /* README.txt */; };
+		E16FE06E19075EFE003E2BC5 /* JLONote.m in Sources */ = {isa = PBXBuildFile; fileRef = E16FE06D19075EFE003E2BC5 /* JLONote.m */; };
 		E1C38398190485A500A465EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C38397190485A500A465EE /* Foundation.framework */; };
 		E1C3839A190485A500A465EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C38399190485A500A465EE /* CoreGraphics.framework */; };
 		E1C3839C190485A500A465EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C3839B190485A500A465EE /* UIKit.framework */; };
@@ -39,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		E137537919048A7C00B51B7F /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		E16FE06C19075EFE003E2BC5 /* JLONote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLONote.h; sourceTree = "<group>"; };
+		E16FE06D19075EFE003E2BC5 /* JLONote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLONote.m; sourceTree = "<group>"; };
 		E1C38394190485A500A465EE /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C38397190485A500A465EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E1C38399190485A500A465EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,6 +126,8 @@
 		E1C3839F190485A500A465EE /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				E16FE06C19075EFE003E2BC5 /* JLONote.h */,
+				E16FE06D19075EFE003E2BC5 /* JLONote.m */,
 				E1C383CC1904868E00A465EE /* JLOAppDelegate.h */,
 				E1C383CD1904868E00A465EE /* JLOAppDelegate.m */,
 				E1C383CE1904868E00A465EE /* JLOViewController.h */,
@@ -263,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1C383D11904868E00A465EE /* JLOAppDelegate.m in Sources */,
+				E16FE06E19075EFE003E2BC5 /* JLONote.m in Sources */,
 				E1C383AD190485A500A465EE /* Notes.xcdatamodeld in Sources */,
 				E1C383D21904868E00A465EE /* JLOViewController.m in Sources */,
 				E1C383A6190485A500A465EE /* main.m in Sources */,
