@@ -1,5 +1,5 @@
 //
-//  JLONoteViewController.h
+//  JLOImageViewController.h
 //  Notes
 //
 //  Created by Javier Llaca on 4/23/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JLONoteViewController : UIViewController
+@interface JLOImageViewController : UIViewController
 
 @end

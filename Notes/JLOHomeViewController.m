@@ -7,10 +7,10 @@
 //
 
 #import "JLOHomeViewController.h"
-#import "JLONoteViewController.h"
+#import "JLOTitleViewController.h"
 #import "JLONote.h"
 
-@interface JLOHomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface JLOHomeViewController () <UITableViewDataSource, UITableViewDelegate, JLOTitleViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -48,16 +48,13 @@
                                                                                target:self
                                                         action:@selector(addButtonPressed:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    JLONote *note = [[JLONote alloc] init];
-    NSLog(@"\nNote date: %@", [note date]);
 }
 
 - (void)addButtonPressed:(UIBarButtonItem *)sender
 {
     NSLog(@"Add Button Pressed");
-//    JLONoteViewController *noteVC = [[JLONoteViewController alloc] init];
-//    noteVC.delegate = self;
-//    [self presentViewController:inputVC animated:YES completion:nil];
+    JLOTitleViewController *titleVC = [[JLOTitleViewController alloc] init];
+    [self.navigationController pushViewController:titleVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +78,11 @@
     cell.textLabel.text = self.strings[indexPath.row];
     
     return cell;
+}
+
+-(void)inputController:(JLOTitleViewController *)controller didFinishWithText:(NSString *)text
+{
+    
 }
 
 @end
