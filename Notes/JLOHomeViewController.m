@@ -9,6 +9,7 @@
 #import "JLOHomeViewController.h"
 #import "JLOTitleViewController.h"
 #import "JLONote.h"
+#include <string.h>
 
 @interface JLOHomeViewController () <UITableViewDataSource, UITableViewDelegate, JLOTitleViewControllerDelegate>
 
@@ -20,9 +21,11 @@
 
 @implementation JLOHomeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+int number = 3;
+
+- (instancetype)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
     }
@@ -46,13 +49,12 @@
     self.title = @"Notes";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                target:self
-                                                        action:@selector(addButtonPressed:)];
+                                                                               action:@selector(addButtonPressed:)];
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)addButtonPressed:(UIBarButtonItem *)sender
 {
-    NSLog(@"Add Button Pressed");
     JLOTitleViewController *titleVC = [[JLOTitleViewController alloc] init];
     [self.navigationController pushViewController:titleVC animated:YES];
 }

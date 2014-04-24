@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     self.title = @"Title";
-    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Content"
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Content"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(nextButtonPressed:)];

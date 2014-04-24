@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JLOImageViewController : UIViewController
+@interface JLOImageViewController : UIViewController <UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
+{
+    UIImagePickerController *takePhoto;
+    UIImagePickerController *choosePhoto;
+    UIImage *image;
+    IBOutlet UIImageView *imageView;
+}
+
+@property UIButton *take;
+@property UIButton *choose;
 
 @end
