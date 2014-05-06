@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JLOHomeViewController.h"
+#import "JLONote.h"
 
 @interface JLOImageViewController : UIViewController <UIImagePickerControllerDelegate,
     UINavigationControllerDelegate>

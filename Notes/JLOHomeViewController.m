@@ -16,6 +16,11 @@
     return self;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"home vc"];
+}
+
 - (void)loadView
 {
     [super loadView];
@@ -30,6 +35,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _notes = [[NSMutableArray alloc] init];
+    self.navigationController.delegate = self;
     self.title = @"Notes";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                target:self
@@ -60,8 +67,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellReuseIdentifer"];
     }
     
-    cell.textLabel.text = _notes[indexPath.row];
-    
+    // set cell text to note title
+    cell.textLabel.text = [_notes[indexPath.row] title];
     return cell;
 }
 

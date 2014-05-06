@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "JLOTitleViewController.h"
+#import "JLONote.h"
 
-@interface JLOHomeViewController : UIViewController <UITableViewDataSource,
-    UITableViewDelegate, JLOTitleViewControllerDelegate>
+@interface JLOHomeViewController : UIViewController <UINavigationControllerDelegate,
+    UITableViewDataSource, UITableViewDelegate, JLOTitleViewControllerDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *notes;

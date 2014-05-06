@@ -7,7 +7,6 @@
 //
 
 #import "JLOImageViewController.h"
-#import "JLONote.h"
 
 @implementation JLOImageViewController
 
@@ -61,7 +60,14 @@
 - (void)nextButtonPressed:(UIBarButtonItem *)sender
 {
     JLONote *note = [[JLONote alloc] initWithTitle:_noteTitle Body:_noteBody Image:_image];
-    NSLog(@"%@", note);
+    JLOHomeViewController *rootViewController = [self.navigationController.viewControllers
+                                            firstObject];
+    [[rootViewController notes] addObject:note];
+    
+    // reload table view in home before popping to home view controller
+    // gives the impression that table reloaded quickly
+    [[rootViewController tableView] reloadData];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

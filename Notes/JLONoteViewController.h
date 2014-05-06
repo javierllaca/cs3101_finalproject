@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JLONote.h"
 
 @interface JLONoteViewController : UIViewController
+
+@property (strong, nonatomic) JLONote *note;
+
+- (id)initWithNote:(JLONote *)note;
 
 @end
