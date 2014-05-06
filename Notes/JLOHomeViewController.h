@@ -11,9 +11,12 @@
 #import "JLONote.h"
 
 @interface JLOHomeViewController : UIViewController <UINavigationControllerDelegate,
-    UITableViewDataSource, UITableViewDelegate, JLOTitleViewControllerDelegate>
+    UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *notes;
+
+// retrieve stored notes using core data
+- (void)loadStoredNotes;
 
 @end

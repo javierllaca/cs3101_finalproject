@@ -30,6 +30,18 @@
     tableView.delegate = self;
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    [self loadStoredNotes];
+}
+
+- (void)loadStoredNotes
+{
+    NSLog(@"Loading...");
+}
+
+// do something...
+- (void)viewDidAppear:(BOOL)animated
+{
+    
 }
 
 - (void)viewDidLoad
@@ -38,10 +50,31 @@
     _notes = [[NSMutableArray alloc] init];
     self.navigationController.delegate = self;
     self.title = @"Notes";
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                               target:self
-                                                                               action:@selector(addButtonPressed:)];
+    
+    // add note button
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                  target:self
+                                  action:@selector(addButtonPressed:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    // edit note list button
+    UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+                             style:UIBarButtonItemStylePlain
+                             target:self
+                             action:@selector(toggleEditingMode:)];
+    self.navigationItem.leftBarButtonItem = edit;
+}
+
+- (IBAction)toggleEditingMode:(id)sender
+{
+    if (_tableView.isEditing) {
+        [sender setTitle:@"Edit"];
+        [_tableView setEditing:NO animated:YES];
+    } else {
+        [sender setTitle:@"Done"];
+        [_tableView setEditing:YES animated:YES];
+    }
 }
 
 - (void)addButtonPressed:(UIBarButtonItem *)sender
@@ -70,11 +103,6 @@
     // set cell text to note title
     cell.textLabel.text = [_notes[indexPath.row] title];
     return cell;
-}
-
--(void)inputController:(JLOTitleViewController *)controller didFinishWithText:(NSString *)text
-{
-    
 }
 
 @end
