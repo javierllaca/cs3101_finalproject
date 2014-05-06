@@ -1,33 +1,22 @@
 //
 //  JLOHomeViewController.m
-//  Note-Taker
+//  Notes
 //
 //  Created by Javier Llaca on 4/20/14.
 //  Copyright (c) 2014 Llaca. All rights reserved.
 //
 
 #import "JLOHomeViewController.h"
-#import "JLOTitleViewController.h"
-#import "JLONote.h"
-#include <string.h>
-
-@interface JLOHomeViewController () <UITableViewDataSource, UITableViewDelegate, JLOTitleViewControllerDelegate>
-
-@property (nonatomic, strong) UITableView *tableView;
-
-@property (nonatomic, strong) NSMutableArray *strings;
-
-@end
 
 @implementation JLOHomeViewController
 
 int number = 3;
 
-- (instancetype)init
+- (id)init
 {
     self = [super init];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -62,12 +51,11 @@ int number = 3;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.strings.count;
+    return _notes.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,7 +65,7 @@ int number = 3;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellReuseIdentifer"];
     }
     
-    cell.textLabel.text = self.strings[indexPath.row];
+    cell.textLabel.text = _notes[indexPath.row];
     
     return cell;
 }

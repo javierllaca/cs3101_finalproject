@@ -1,6 +1,6 @@
 //
 //  JLOAppDelegate.m
-//  Note-Taker
+//  Notes
 //
 //  Created by Javier Llaca on 4/4/14.
 //  Copyright (c) 2014 Llaca. All rights reserved.
@@ -18,6 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     JLOHomeViewController *vc = [[JLOHomeViewController alloc] init];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     

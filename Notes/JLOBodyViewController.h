@@ -17,8 +17,12 @@
 
 @end
 
-@interface JLOBodyViewController : UIViewController
+@interface JLOBodyViewController : UIViewController <UITextViewDelegate>
 
-@property (nonatomic, weak) id<JLOBodyViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<JLOBodyViewControllerDelegate> delegate;
+@property (strong, nonatomic) NSString *noteTitle;
+@property (strong, nonatomic) UITextView *noteBody;
+
+- (id)initWithTitle:(NSString *)title;
 
 @end

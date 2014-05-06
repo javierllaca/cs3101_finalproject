@@ -9,15 +9,25 @@
 #import <UIKit/UIKit.h>
 
 @interface JLOImageViewController : UIViewController <UIImagePickerControllerDelegate,
-UINavigationControllerDelegate>
-{
-    UIImagePickerController *takePhoto;
-    UIImagePickerController *choosePhoto;
-    UIImage *image;
-    IBOutlet UIImageView *imageView;
-}
+    UINavigationControllerDelegate>
 
-@property UIButton *take;
-@property UIButton *choose;
+// buttons
+@property UIButton *takePhoto;
+@property UIButton *choosePhoto;
+
+// pickers
+@property UIImagePickerController *pickFromCamera;
+@property UIImagePickerController *pickFromLibrary;
+
+// image and container
+@property UIImageView *imageView;
+@property UIImage *image;
+
+// properties from past view controllers
+@property NSString *noteTitle;
+@property NSString *noteBody;
+
+// custom constructor
+- (id)initWithTitle:(NSString *)title Body:(NSString *)body;
 
 @end

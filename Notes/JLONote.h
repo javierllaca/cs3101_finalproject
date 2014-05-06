@@ -10,10 +10,11 @@
 
 @interface JLONote : NSObject
 
-@property NSString  *title;
-@property NSString  *body;
-@property NSDate    *date;
-@property NSString  *location;
-@property UIImage   *picture;
+@property (strong, nonatomic) NSString  *title;
+@property (strong, nonatomic) NSString  *body;
+@property (strong, nonatomic) NSDate    *date;
+@property (strong, nonatomic) UIImage   *image;
+
+- (id)initWithTitle:(NSString *)title Body:(NSString *)body Image:(UIImage *)image;
 
 @end

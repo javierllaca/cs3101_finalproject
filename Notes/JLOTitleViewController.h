@@ -17,8 +17,9 @@
 
 @end
 
-@interface JLOTitleViewController : UIViewController
+@interface JLOTitleViewController : UIViewController <UITextViewDelegate>
 
-@property (nonatomic, weak) id<JLOTitleViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<JLOTitleViewControllerDelegate> delegate;
+@property (strong, nonatomic) UITextField *noteTitle;
 
 @end

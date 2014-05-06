@@ -10,18 +10,22 @@
 
 @implementation JLONote
 
-- (id)init
+- (id)initWithTitle:(NSString *)title Body:(NSString *)body Image:(UIImage *)image
 {
     self = [super init];
     if (self) {
-        [self setDate:[NSDate date]];
+        _title = title;
+        _body = body;
+        _image = image;
+        _date = [NSDate date];
     }
     return self;
 }
 
-- (void)attachPicture:(UIImage *) picture
+- (NSString *)description
 {
-    self.picture = picture;
+    return [NSString stringWithFormat:@"Title: %@\nBody: %@\nDate: %@",
+            _title, _body, _date];
 }
 
 @end
