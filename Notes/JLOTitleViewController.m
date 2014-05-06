@@ -20,7 +20,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // Set background to white to hide transition between views
     self.view.backgroundColor = [UIColor whiteColor];
     

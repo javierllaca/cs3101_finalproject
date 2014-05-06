@@ -10,14 +10,9 @@
 
 @implementation JLOHomeViewController
 
-int number = 3;
-
 - (id)init
 {
     self = [super init];
-    if (self) {
-        
-    }
     return self;
 }
 
