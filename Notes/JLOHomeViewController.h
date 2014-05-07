@@ -11,6 +11,8 @@
 #import "JLONoteViewController.h"
 #import "JLOAppDelegate.h"
 
+#define CELL_HEIGHT 60.0
+
 @interface JLOHomeViewController : UIViewController <UINavigationControllerDelegate,
     UITableViewDataSource, UITableViewDelegate>
 

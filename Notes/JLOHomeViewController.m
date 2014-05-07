@@ -21,7 +21,7 @@
     [super loadView];
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds
                                               style:UITableViewStylePlain];
-    [_tableView setRowHeight:70];
+    [_tableView setRowHeight:CELL_HEIGHT];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
@@ -158,9 +158,10 @@
     // If note has an image, setup a subview for it in the cell
     if (note.image) {
         CGSize photosize = note.image.size;
-        double width = (photosize.width > photosize.height) ? 80.0 : 45.0;
-        double height = 60.0;
         double margin = 5.0;
+        double ratio = photosize.width / photosize.height;
+        double height = CELL_HEIGHT - 2 * margin;
+        double width = height * ratio;
         photo = [[UIImageView alloc]
                  initWithFrame:CGRectMake(self.view.frame.size.width - width - margin,
                                           margin, width, height)];
@@ -171,7 +172,9 @@
     
     // Assign the cell title and subtitle
     cell.textLabel.text = note.title;
+    cell.textLabel.font = [UIFont systemFontOfSize:14.0];
     cell.detailTextLabel.text = dateString;
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:12.0];
     
     return cell;
 }

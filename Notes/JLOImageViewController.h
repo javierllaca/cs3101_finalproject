@@ -10,6 +10,9 @@
 #import "JLOHomeViewController.h"
 #import "JLONote.h"
 
+#define IMAGE_CONTAINER_TAG 10
+#define IMAGE_TAG           20
+
 @interface JLOImageViewController : UIViewController <UIImagePickerControllerDelegate,
     UINavigationControllerDelegate>
 
@@ -22,6 +25,7 @@
 @property UIImagePickerController *pickFromLibrary;
 
 // image and container
+@property UIView *imageContainer;
 @property UIImageView *imageView;
 @property UIImage *image;
 

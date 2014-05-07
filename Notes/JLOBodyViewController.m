@@ -35,10 +35,10 @@
     self.navigationItem.rightBarButtonItem = nextButton;
     
     // Add text view to view
-    _noteBody = [[UITextView alloc] initWithFrame:CGRectMake(10, 40, 300, 400)];
+    _noteBody = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 400)];
     _noteBody.text = @"Enter body content...";
     _noteBody.textColor = [UIColor lightGrayColor];
-    [_noteBody setFont:[UIFont systemFontOfSize:18]];
+    [_noteBody setFont:[UIFont systemFontOfSize:16.0]];
     _noteBody.textAlignment = NSTextAlignmentJustified;
     _noteBody.delegate = self;
     [self.view addSubview:_noteBody];

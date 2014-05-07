@@ -8,8 +8,6 @@
 
 #import "JLOImageViewController.h"
 
-#define IMAGE_TAG 10
-
 @implementation JLOImageViewController
 
 - (id)initWithTitle:(NSString *)title Body:(NSString *)body
@@ -22,10 +20,10 @@
     return self;
 }
 
-- (void)viewDidLoad
+
+- (void)loadView
 {
-    [super viewDidLoad];
-    
+    [super loadView];
     // Set background to white to hide transition between views
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -39,25 +37,37 @@
                                    action:@selector(done:)];
     self.navigationItem.rightBarButtonItem = nextButton;
     
+    CGSize viewSize = self.view.frame.size;
+    
     // take photo button
-    _takePhoto = [UIButton buttonWithType:UIButtonTypeSystem];
+    _takePhoto = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_takePhoto addTarget:self
-                 action:@selector(takePhoto:)
-       forControlEvents:UIControlEventTouchUpInside];
-    _takePhoto.titleLabel.font = [UIFont systemFontOfSize:18];
-    [_takePhoto setFrame:CGRectMake(10, 80, 300, 30)];
+                   action:@selector(takePhoto:)
+         forControlEvents:UIControlEventTouchUpInside];
+    _takePhoto.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [_takePhoto setFrame:CGRectMake(0, 90, viewSize.width, 40)];
     [_takePhoto setTitle:@"Take Photo" forState:UIControlStateNormal];
     [self.view addSubview:_takePhoto];
     
     // choose photo button
-    _choosePhoto = [UIButton buttonWithType:UIButtonTypeSystem];
+    _choosePhoto = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_choosePhoto addTarget:self
-                   action:@selector(choosePhoto:)
-         forControlEvents:UIControlEventTouchUpInside];
-    _choosePhoto.titleLabel.font = [UIFont systemFontOfSize:18];
-    [_choosePhoto setFrame:CGRectMake(10, 120, 300, 30)];
+                     action:@selector(choosePhoto:)
+           forControlEvents:UIControlEventTouchUpInside];
+    _choosePhoto.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [_choosePhoto setFrame:CGRectMake(0, 150, viewSize.width, 40)];
     [_choosePhoto setTitle:@"Choose Photo" forState:UIControlStateNormal];
     [self.view addSubview:_choosePhoto];
+    
+    // square image container
+    double margin = 40.0;
+    double topBound = _choosePhoto.frame.origin.y + _choosePhoto.frame.size.height + margin;
+    double sideLength = viewSize.width - 2 * margin;
+    
+    _imageContainer = [[UIView alloc]
+                              initWithFrame:CGRectMake(margin, topBound, sideLength, sideLength)];
+    _imageContainer.tag = IMAGE_CONTAINER_TAG;
+    [self.view addSubview:_imageContainer];
 }
 
 - (void)done:(UIBarButtonItem *)sender
@@ -118,18 +128,30 @@
     if([self.view viewWithTag:IMAGE_TAG] != nil)
         [[self.view viewWithTag:IMAGE_TAG] removeFromSuperview];
     
-    int topBound = _choosePhoto.frame.origin.y + _choosePhoto.frame.size.height + 20;
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    CGSize imageSize = _image.size;
+    CGSize containerSize = _imageContainer.frame.size;
     
-    double ratio = (_image.size.width > _image.size.height) ?
-        _image.size.width / (screenSize.width - 30) :
-        _image.size.height / (screenSize.height - topBound - 30);
+    double width, height;
+    double originX = 0;
+    double ratio = imageSize.width / imageSize.height;
     
-    _imageView = [[UIImageView alloc] initWithFrame:
-                  CGRectMake((2 * self.view.center.x - _image.size.width / ratio) / 2,
-                             topBound,_image.size.width / ratio, _image.size.height / ratio)];
+    if (imageSize.width > imageSize.height) {
+        width = containerSize.width;
+        height = width / ratio;
+        
+    } else {
+        height = containerSize.width;
+        width = height * ratio;
+        
+        // make image appear centered if its height > width
+        originX = (containerSize.width - width) / 2;
+    }
+    
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(originX, 0, width, height)];
+    
+    _imageView.image = _image;
     _imageView.tag = IMAGE_TAG;
-    [self.view addSubview:_imageView];
+    [[self.view viewWithTag:IMAGE_CONTAINER_TAG] addSubview:_imageView];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker

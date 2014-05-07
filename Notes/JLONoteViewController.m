@@ -41,8 +41,9 @@
     _body.textAlignment = NSTextAlignmentJustified;
     _body.text = _note.body;
     _body.textColor = [UIColor blackColor];
-    [_body setFont:[UIFont systemFontOfSize:18]];
+    [_body setFont:[UIFont systemFontOfSize:16.0]];
     [_body sizeToFit];
+    _body.scrollEnabled = NO;
     
     if (_note.image) {
         // We want the width of the image to fit the width of the scroll view
@@ -70,8 +71,10 @@
         [mc setSubject:_note.title];
         [mc setMessageBody:_note.body isHTML:NO];
         
-        // Compress note image to a jpeg file in NSData
-        NSData *picture = UIImageJPEGRepresentation(_note.image, 0.3);
+        // Encode scaled image as jpeg file
+        NSData *picture = UIImageJPEGRepresentation(_note.image, 1.0);
+        
+        // Set atttachment attributes
         NSString *mime = @"image/jpeg";
         NSString *filename = @"attached_picture.jpg";
         
