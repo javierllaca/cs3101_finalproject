@@ -25,8 +25,8 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
-    [self loadStoredNotes];
     _notes = [[NSMutableArray alloc] init];
+    [self loadStoredNotes];
 }
 
 - (void)viewDidLoad
@@ -55,9 +55,31 @@
     self.navigationItem.leftBarButtonItem = edit;
 }
 
+// Load from core data
 - (void)loadStoredNotes
 {
-    ;
+    JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    [request setPredicate:nil];
+    NSManagedObject *matches = nil;
+    
+    NSError *error;
+    NSArray *objects = [context executeFetchRequest:request error:&error];
+    
+    if ([objects count] == 0)
+        NSLog(@"No matches");
+    
+    else {
+        for (int i = 0; i < [objects count];i++) {
+            matches = objects[i];
+            NSData *data = [matches valueForKey:@"note"];
+            JLONote *note = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            [self.notes addObject:note];
+        }
+    }
 }
 
 #pragma Navigation Bar Button Methods

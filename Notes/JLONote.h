@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JLONote : NSObject
+@interface JLONote : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSString  *title;
 @property (strong, nonatomic) NSString  *body;
