@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JLOTitleViewController.h"
 #import "JLONote.h"
+#import "JLONoteViewController.h"
 
 @interface JLOHomeViewController : UIViewController <UINavigationControllerDelegate,
     UITableViewDataSource, UITableViewDelegate>
@@ -18,5 +19,8 @@
 
 // retrieve stored notes using core data
 - (void)loadStoredNotes;
+
+// add note to list
+- (void)addNote:(UIBarButtonItem *)sender;
 
 @end

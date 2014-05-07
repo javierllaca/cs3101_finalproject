@@ -28,7 +28,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"Content";
-    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Picture"
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Picture"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(nextButtonPressed:)];
@@ -39,6 +39,7 @@
     _noteBody.text = @"Enter body content...";
     _noteBody.textColor = [UIColor lightGrayColor];
     [_noteBody setFont:[UIFont systemFontOfSize:18]];
+    _noteBody.textAlignment = NSTextAlignmentJustified;
     _noteBody.delegate = self;
     [self.view addSubview:_noteBody];
 }

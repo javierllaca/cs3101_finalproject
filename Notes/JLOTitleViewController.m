@@ -24,27 +24,32 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"Title";
-    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Content"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(nextButtonPressed:)];
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Content"
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(nextButtonPressed:)];
     self.navigationItem.rightBarButtonItem = nextButton;
     
     // Initialize text field
     _noteTitle = [[UITextField alloc] initWithFrame:CGRectMake(10, 100, 300, 50)];
     
-    // Format text field
-    _noteTitle.borderStyle = UITextBorderStyleRoundedRect;
-    _noteTitle.font = [UIFont systemFontOfSize:18];
-    _noteTitle.placeholder = @"Enter note title...";
-    _noteTitle.autocorrectionType = UITextAutocorrectionTypeNo;
-    _noteTitle.keyboardType = UIKeyboardTypeDefault;
-    _noteTitle.returnKeyType = UIReturnKeyDone;
-    _noteTitle.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _noteTitle.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [self formatTextField:_noteTitle];
     
     // Add text field to view
     [self.view addSubview:_noteTitle];
+}
+
+- (void)formatTextField:(UITextField *)textField
+{
+    textField.borderStyle = UITextBorderStyleRoundedRect;
+    textField.font = [UIFont systemFontOfSize:18];
+    textField.placeholder = @"Enter note title...";
+    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.keyboardType = UIKeyboardTypeDefault;
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 }
 
 - (void)nextButtonPressed:(UIBarButtonItem *)sender

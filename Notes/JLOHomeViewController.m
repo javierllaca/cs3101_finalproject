@@ -16,54 +16,56 @@
     return self;
 }
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"home vc"];
-}
-
 - (void)loadView
 {
     [super loadView];
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds
-                                                          style:UITableViewStylePlain];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    [self.view addSubview:tableView];
-    self.tableView = tableView;
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds
+                                              style:UITableViewStylePlain];
+    [_tableView setRowHeight:50];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    [self.view addSubview:_tableView];
     [self loadStoredNotes];
-}
-
-- (void)loadStoredNotes
-{
-    NSLog(@"Loading...");
-}
-
-// do something...
-- (void)viewDidAppear:(BOOL)animated
-{
-    
+    _notes = [[NSMutableArray alloc] init];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _notes = [[NSMutableArray alloc] init];
-    self.navigationController.delegate = self;
     self.title = @"Notes";
-    
+    self.navigationController.delegate = self;
+    [self setNavigationBarButtons];
+}
+
+- (void)setNavigationBarButtons
+{
     // add note button
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                   target:self
-                                  action:@selector(addButtonPressed:)];
+                                  action:@selector(addNote:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
     // edit note list button
-    UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+    UIBarButtonItem *edit = [[UIBarButtonItem alloc]
+                             initWithTitle:@"Edit"
                              style:UIBarButtonItemStylePlain
                              target:self
                              action:@selector(toggleEditingMode:)];
     self.navigationItem.leftBarButtonItem = edit;
+}
+
+- (void)loadStoredNotes
+{
+    ;
+}
+
+#pragma Navigation Bar Button Methods
+
+- (void)addNote:(UIBarButtonItem *)sender
+{
+    JLOTitleViewController *titleVC = [[JLOTitleViewController alloc] init];
+    [self.navigationController pushViewController:titleVC animated:YES];
 }
 
 - (IBAction)toggleEditingMode:(id)sender
@@ -77,32 +79,77 @@
     }
 }
 
-- (void)addButtonPressed:(UIBarButtonItem *)sender
+- (void)tableView:(UITableView *)tableView
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JLOTitleViewController *titleVC = [[JLOTitleViewController alloc] init];
-    [self.navigationController pushViewController:titleVC animated:YES];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // delete note from array
+        JLONote *note = _notes[indexPath.row];
+        [_notes removeObjectIdenticalTo:note];
+        
+        // delete cell from table
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
+#pragma Table View Methods
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView
+    numberOfRowsInSection:(NSInteger)section
 {
     return _notes.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellReuseIdentifer"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellReuseIdentifer"];
-    }
+    static NSString *CellIdentifier = @"Cell";
+    JLONote *note = _notes[indexPath.row];
     
-    // set cell text to note title
-    cell.textLabel.text = [_notes[indexPath.row] title];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    NSString *dateString = [dateFormatter stringFromDate:note.date];
+    
+    UILabel *title, *date;
+    UIImageView *photo;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:CellIdentifier];
+        
+        title = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 220.0, 20.0)];
+        title.text = note.title;
+        title.font = [UIFont systemFontOfSize:18];
+        title.textColor = [UIColor blackColor];
+        [cell.contentView addSubview:title];
+        
+        date = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 220.0, 15)];
+        date.text = dateString;
+        date.font = [UIFont systemFontOfSize:12];
+        date.textColor = [UIColor lightGrayColor];
+        [cell.contentView addSubview:date];
+        
+        CGSize photosize = note.image.size;
+        double width = (photosize.width > photosize.height) ? 55 : 30;
+        double height = 40;
+        double margin = 5;
+        photo = [[UIImageView alloc]
+                 initWithFrame:CGRectMake(self.view.frame.size.width - width - margin,
+                                          margin, width, height)];
+        photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        photo.image = note.image;
+        [cell.contentView addSubview:photo];
+    }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    JLONoteViewController *detailVC = [[JLONoteViewController alloc] initWithNote:_notes[indexPath.row]];
+    [self.navigationController pushViewController:detailVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

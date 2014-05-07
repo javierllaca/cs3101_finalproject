@@ -12,6 +12,9 @@
 @interface JLONoteViewController : UIViewController
 
 @property (strong, nonatomic) JLONote *note;
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UITextView *body;
+@property (strong, nonatomic) UIImageView *image;
 
 - (id)initWithNote:(JLONote *)note;
 

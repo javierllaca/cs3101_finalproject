@@ -8,6 +8,8 @@
 
 #import "JLOImageViewController.h"
 
+#define IMAGE_TAG 10
+
 @implementation JLOImageViewController
 
 - (id)initWithTitle:(NSString *)title Body:(NSString *)body
@@ -30,10 +32,11 @@
     self.title = @"Picture";
     
     // next button
-    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Done!"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(nextButtonPressed:)];
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Done!"
+                                   style:UIBarButtonItemStyleDone
+                                   target:self
+                                   action:@selector(nextButtonPressed:)];
     self.navigationItem.rightBarButtonItem = nextButton;
     
     // take photo button
@@ -98,23 +101,20 @@
 
 - (void)setImageView
 {
-    for (UIView *v in self.view.subviews)
-        if (v == _imageView)
-            [v removeFromSuperview];
+    if([self.view viewWithTag:IMAGE_TAG] != nil)
+        [[self.view viewWithTag:IMAGE_TAG] removeFromSuperview];
     
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    int topBound = self.navigationController.navigationBar.frame.size.height + 130;
-    double ratio;
-    if (_image.size.width > _image.size.height)
-        ratio = _image.size.width / bounds.size.width;
-    else
-        ratio = _image.size.height / (bounds.size.height - topBound - 30);
+    int topBound = _choosePhoto.frame.origin.y + _choosePhoto.frame.size.height + 20;
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    
+    double ratio = (_image.size.width > _image.size.height) ?
+        _image.size.width / (screenSize.width - 30) :
+        _image.size.height / (screenSize.height - topBound - 30);
     
     _imageView = [[UIImageView alloc] initWithFrame:
                   CGRectMake((2 * self.view.center.x - _image.size.width / ratio) / 2,
-                             topBound,
-                             _image.size.width / ratio,
-                             _image.size.height / ratio)];
+                             topBound,_image.size.width / ratio, _image.size.height / ratio)];
+    _imageView.tag = IMAGE_TAG;
     [self.view addSubview:_imageView];
 }
 
