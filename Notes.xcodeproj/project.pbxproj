@@ -29,6 +29,7 @@
 		E1EE7614190898C10015EB29 /* JLOBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE7612190898C10015EB29 /* JLOBodyViewController.m */; };
 		E1EE761919089CF40015EB29 /* JLOImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE761719089CF40015EB29 /* JLOImageViewController.m */; };
 		E1EE761E1908B7C20015EB29 /* JLONoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE761C1908B7C20015EB29 /* JLONoteViewController.m */; };
+		E1F151B2191A256A00E96C65 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F151B1191A256A00E96C65 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		E1EE761719089CF40015EB29 /* JLOImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOImageViewController.m; sourceTree = "<group>"; };
 		E1EE761B1908B7C20015EB29 /* JLONoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLONoteViewController.h; sourceTree = "<group>"; };
 		E1EE761C1908B7C20015EB29 /* JLONoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLONoteViewController.m; sourceTree = "<group>"; };
+		E1F151B1191A256A00E96C65 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1F151B2191A256A00E96C65 /* MessageUI.framework in Frameworks */,
 				E1C3839A190485A500A465EE /* CoreGraphics.framework in Frameworks */,
 				E1C3839E190485A500A465EE /* CoreData.framework in Frameworks */,
 				E1C3839C190485A500A465EE /* UIKit.framework in Frameworks */,
@@ -124,6 +127,7 @@
 		E1C38396190485A500A465EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1F151B1191A256A00E96C65 /* MessageUI.framework */,
 				E1C38397190485A500A465EE /* Foundation.framework */,
 				E1C38399190485A500A465EE /* CoreGraphics.framework */,
 				E1C3839B190485A500A465EE /* UIKit.framework */,

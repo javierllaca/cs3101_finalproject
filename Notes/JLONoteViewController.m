@@ -8,10 +8,6 @@
 
 #import "JLONoteViewController.h"
 
-@interface JLONoteViewController ()
-
-@end
-
 @implementation JLONoteViewController
 
 - (id)initWithNote:(JLONote *)note
@@ -28,6 +24,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setTitle:_note.title];
+    
+    // email note button
+    UIBarButtonItem *email = [[UIBarButtonItem alloc] initWithTitle:@"Email"
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(email:)];
+    self.navigationItem.rightBarButtonItem = email;
     
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     CGSize navBarSize = self.navigationController.navigationBar.frame.size;
@@ -55,6 +58,34 @@
     [_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width,
                     _body.frame.size.height + 20 + _image.frame.size.height)];
     [self.view addSubview:_scrollView];
+}
+
+- (IBAction)email:(id)sender
+{
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    if ([MFMailComposeViewController canSendMail]) {
+        mc.mailComposeDelegate = self;
+        [mc setSubject:_note.title];
+        [mc setMessageBody:_note.body isHTML:NO];
+        
+        // Compress note image to a jpeg file in NSData
+        NSData *picture = UIImagePNGRepresentation(_note.image);
+        NSString *mime = @"image/png";
+        NSString *filename = @"attached_picture.png";
+        
+        // Send image as attachment
+        [mc addAttachmentData:picture
+                     mimeType:mime
+                     fileName:filename];
+        
+        [self presentViewController:mc animated:YES completion:NULL];
+     }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller
+           didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

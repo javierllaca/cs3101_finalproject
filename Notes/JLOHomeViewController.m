@@ -21,7 +21,7 @@
     [super loadView];
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds
                                               style:UITableViewStylePlain];
-    [_tableView setRowHeight:50];
+    [_tableView setRowHeight:70];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
@@ -119,21 +119,21 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
         
-        title = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 220.0, 20.0)];
+        title = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 220.0, 20.0)];
         title.text = note.title;
         title.font = [UIFont systemFontOfSize:18];
         title.textColor = [UIColor blackColor];
         [cell.contentView addSubview:title];
         
-        date = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 220.0, 15)];
+        date = [[UILabel alloc] initWithFrame:CGRectMake(15, 40, 220.0, 15)];
         date.text = dateString;
         date.font = [UIFont systemFontOfSize:12];
         date.textColor = [UIColor lightGrayColor];
         [cell.contentView addSubview:date];
         
         CGSize photosize = note.image.size;
-        double width = (photosize.width > photosize.height) ? 55 : 30;
-        double height = 40;
+        double width = (photosize.width > photosize.height) ? 80 : 45;
+        double height = 60;
         double margin = 5;
         photo = [[UIImageView alloc]
                  initWithFrame:CGRectMake(self.view.frame.size.width - width - margin,

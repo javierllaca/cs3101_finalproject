@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "JLONote.h"
 
-@interface JLONoteViewController : UIViewController
+@interface JLONoteViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) JLONote *note;
 @property (strong, nonatomic) UIScrollView *scrollView;
