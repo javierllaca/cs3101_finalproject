@@ -71,9 +71,9 @@
         [mc setMessageBody:_note.body isHTML:NO];
         
         // Compress note image to a jpeg file in NSData
-        NSData *picture = UIImagePNGRepresentation(_note.image);
-        NSString *mime = @"image/png";
-        NSString *filename = @"attached_picture.png";
+        NSData *picture = UIImageJPEGRepresentation(_note.image, 0.3);
+        NSString *mime = @"image/jpeg";
+        NSString *filename = @"attached_picture.jpg";
         
         // Send image as attachment
         [mc addAttachmentData:picture

@@ -79,6 +79,7 @@
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:note];
     [newContact setValue:data forKey:@"note"];
+    [newContact setValue:note.date forKey:@"date"];
     
     NSError *error;
     [context save:&error];

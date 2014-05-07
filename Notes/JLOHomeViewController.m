@@ -60,19 +60,16 @@
 {
     JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context];
+    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDesc];
+    [request setEntity:[NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context]];
     [request setPredicate:nil];
-    NSManagedObject *matches = nil;
     
     NSError *error;
     NSArray *objects = [context executeFetchRequest:request error:&error];
     
-    if ([objects count] == 0)
-        NSLog(@"No matches");
-    
-    else {
+    NSManagedObject *matches = nil;
+    if ([objects count] != 0) {
         for (int i = 0; i < [objects count];i++) {
             matches = objects[i];
             NSData *data = [matches valueForKey:@"note"];
@@ -80,6 +77,22 @@
             [self.notes addObject:note];
         }
     }
+}
+
+// deletes note from core data
+- (void)deleteNote:(JLONote *)note
+{
+    JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date == %@)", note.date];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context]];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    [context deleteObject:[results firstObject]];
+    [context save:&error];
 }
 
 #pragma Navigation Bar Button Methods
@@ -112,6 +125,7 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
+        [self deleteNote:note];
     }
 }
 
