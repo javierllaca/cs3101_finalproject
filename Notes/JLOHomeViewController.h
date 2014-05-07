@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "JLOTitleViewController.h"
-#import "JLONote.h"
 #import "JLONoteViewController.h"
 
 @interface JLOHomeViewController : UIViewController <UINavigationControllerDelegate,

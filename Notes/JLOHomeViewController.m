@@ -84,12 +84,12 @@
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // delete note from array
-        JLONote *note = _notes[indexPath.row];
-        [_notes removeObjectIdenticalTo:note];
+        NSArray *items = [_notes copy];
+        JLONote *note = items[indexPath.row];
+        [_notes removeObject:note];
         
-        // delete cell from table
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -104,37 +104,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"cellIdentifier";
     JLONote *note = _notes[indexPath.row];
     
+    // Format the NSDate in an NSString (e.g. "May 5, 2014")
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     NSString *dateString = [dateFormatter stringFromDate:note.date];
     
-    UILabel *title, *date;
     UIImageView *photo;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    if (cell == nil)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
-        
-        title = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 220.0, 20.0)];
-        title.text = note.title;
-        title.font = [UIFont systemFontOfSize:18];
-        title.textColor = [UIColor blackColor];
-        [cell.contentView addSubview:title];
-        
-        date = [[UILabel alloc] initWithFrame:CGRectMake(15, 40, 220.0, 15)];
-        date.text = dateString;
-        date.font = [UIFont systemFontOfSize:12];
-        date.textColor = [UIColor lightGrayColor];
-        [cell.contentView addSubview:date];
-        
+    
+    // If note has an image, setup a subview for it in the cell
+    if (note.image) {
         CGSize photosize = note.image.size;
-        double width = (photosize.width > photosize.height) ? 80 : 45;
-        double height = 60;
-        double margin = 5;
+        double width = (photosize.width > photosize.height) ? 80.0 : 45.0;
+        double height = 60.0;
+        double margin = 5.0;
         photo = [[UIImageView alloc]
                  initWithFrame:CGRectMake(self.view.frame.size.width - width - margin,
                                           margin, width, height)];
@@ -142,6 +132,11 @@
         photo.image = note.image;
         [cell.contentView addSubview:photo];
     }
+    
+    // Assign the cell title and subtitle
+    cell.textLabel.text = note.title;
+    cell.detailTextLabel.text = dateString;
+    
     return cell;
 }
 

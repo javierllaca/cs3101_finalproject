@@ -44,15 +44,17 @@
     [_body setFont:[UIFont systemFontOfSize:18]];
     [_body sizeToFit];
     
-    // We want the width of the image to fit the width of the scroll view
-    double ratio = _note.image.size.width / _scrollView.frame.size.width;
-    
-    _image = [[UIImageView alloc] initWithFrame: CGRectMake(0, _body.frame.size.height + 20,
-                            _note.image.size.width / ratio, _note.image.size.height / ratio)];
-    _image.image = _note.image;
+    if (_note.image) {
+        // We want the width of the image to fit the width of the scroll view
+        double ratio = _note.image.size.width / _scrollView.frame.size.width;
+        
+        _image = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, _body.frame.size.height + 20.0,
+                                                                _note.image.size.width / ratio, _note.image.size.height / ratio)];
+        _image.image = _note.image;
+        [_scrollView addSubview:_image];
+    }
     
     [_scrollView addSubview:_body];
-    [_scrollView addSubview:_image];
     
     // Set content size of scroll view to fit the body and image of note
     [_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width,
