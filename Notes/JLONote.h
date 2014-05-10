@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString  *body;
 @property (strong, nonatomic) NSDate    *date;
 @property (strong, nonatomic) UIImage   *image;
+@property BOOL stored;
 
 - (id)initWithTitle:(NSString *)title Body:(NSString *)body Image:(UIImage *)image;
 

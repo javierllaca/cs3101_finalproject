@@ -18,6 +18,7 @@
         _body = body;
         _image = image;
         _date = [NSDate date];
+        _stored = NO;
     }
     return self;
 }
@@ -44,7 +45,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Title: %@\nBody: %@\nDate: %@",
+    return [NSString stringWithFormat:@"Title: %@, Body: %@, Date: %@",
             _title, _body, _date];
 }
 

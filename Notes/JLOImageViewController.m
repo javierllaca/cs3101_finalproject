@@ -70,30 +70,19 @@
     [self.view addSubview:_imageContainer];
 }
 
+- (void)storeNote
+{
+    JLONote *note = [[JLONote alloc] initWithTitle:_noteTitle
+                                              Body:_noteBody
+                                             Image:_image];
+    JLOHomeViewController *rootViewController = [self.navigationController.viewControllers firstObject];
+    [[rootViewController notes] addObject:note];
+    [[rootViewController tableView] reloadData];
+}
+
 - (void)done:(UIBarButtonItem *)sender
 {
-    JLONote *note = [[JLONote alloc] initWithTitle:_noteTitle Body:_noteBody Image:_image];
-    JLOHomeViewController *rootViewController = [self.navigationController.viewControllers
-                                            firstObject];
-    [[rootViewController notes] addObject:note];
-    
-    // reload table view in home before popping to home view controller
-    // gives the impression that table reloaded quickly
-    [[rootViewController tableView] reloadData];
-    
-    // Store in core data
-    JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSManagedObject *newContact;
-    newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Notes" inManagedObjectContext:context];
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:note];
-    [newContact setValue:data forKey:@"note"];
-    [newContact setValue:note.date forKey:@"date"];
-    
-    NSError *error;
-    [context save:&error];
-    
+    [self storeNote];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

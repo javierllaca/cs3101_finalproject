@@ -63,6 +63,14 @@
     [self.view addSubview:_scrollView];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if (![_note.body isEqualToString:_body.text]) {
+        _note.body = _body.text;
+        _note.stored = NO;
+    }
+}
+
 - (IBAction)email:(id)sender
 {
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];

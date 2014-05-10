@@ -24,8 +24,8 @@
     [_tableView setRowHeight:CELL_HEIGHT];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    [self.view addSubview:_tableView];
     _notes = [[NSMutableArray alloc] init];
+    [self.view addSubview:_tableView];
     [self loadStoredNotes];
 }
 
@@ -35,6 +35,48 @@
     self.title = @"Notes";
     self.navigationController.delegate = self;
     [self setNavigationBarButtons];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (JLONote *note in _notes) {
+            if (!note.stored) {
+                NSLog(@"%@", note);
+                
+                // Store in core data
+                JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+                NSManagedObjectContext *context = [appDelegate managedObjectContext];
+                
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date == %@)", note.date];
+                NSFetchRequest *request = [[NSFetchRequest alloc] init];
+                [request setEntity:[NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context]];
+                [request setPredicate:predicate];
+                
+                NSError *error = nil;
+                NSArray *results = [context executeFetchRequest:request error:&error];
+                
+                if ([results count] != 0)
+                    [context deleteObject:[results firstObject]];
+                
+                NSManagedObject *newContact;
+                newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Notes" inManagedObjectContext:context];
+                
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:note];
+                [newContact setValue:data forKey:@"note"];
+                [newContact setValue:note.date forKey:@"date"];
+                
+                [context save:&error];
+                
+                note.stored = YES;
+            }
+        }
+    });
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 - (void)setNavigationBarButtons
@@ -70,7 +112,7 @@
     
     NSManagedObject *matches = nil;
     if ([objects count] != 0) {
-        for (int i = 0; i < [objects count];i++) {
+        for (int i = 0; i < [objects count]; i++) {
             matches = objects[i];
             NSData *data = [matches valueForKey:@"note"];
             JLONote *note = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -91,8 +133,10 @@
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:request error:&error];
+    
     [context deleteObject:[results firstObject]];
     [context save:&error];
+    [_notes removeObjectIdenticalTo:note];
 }
 
 #pragma Navigation Bar Button Methods
@@ -115,8 +159,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView
-    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-    forRowAtIndexPath:(NSIndexPath *)indexPath
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSArray *items = [_notes copy];
@@ -132,9 +176,31 @@
 #pragma Table View Methods
 
 - (NSInteger)tableView:(UITableView *)tableView
-    numberOfRowsInSection:(NSInteger)section
+ numberOfRowsInSection:(NSInteger)section
 {
     return _notes.count;
+}
+
+-(UIImage*)imageThumbnail:(UIImage *)original
+{
+    double width, height, originX, originY;
+    if (original.size.width > original.size.height) {
+        width = height = original.size.height;
+        originX = (original.size.width - height) / 2;
+        originY = 0;
+    } else {
+        width = height = original.size.width;
+        originX = 0;
+        originY = (original.size.height - width) / 2;
+    }
+    
+    CGRect cropSquare = CGRectMake(originX, originY, width, height);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([original CGImage], cropSquare);
+    
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:original.imageOrientation];
+    CGImageRelease(imageRef);
+    
+    return cropped;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -157,16 +223,12 @@
     
     // If note has an image, setup a subview for it in the cell
     if (note.image) {
-        CGSize photosize = note.image.size;
         double margin = 5.0;
-        double ratio = photosize.width / photosize.height;
-        double height = CELL_HEIGHT - 2 * margin;
-        double width = height * ratio;
-        photo = [[UIImageView alloc]
-                 initWithFrame:CGRectMake(self.view.frame.size.width - width - margin,
-                                          margin, width, height)];
+        double sideLength = CELL_HEIGHT - 2 * margin;
+        CGRect thumbnail = CGRectMake(self.view.frame.size.width - margin - sideLength, margin, sideLength, sideLength);
+        photo = [[UIImageView alloc]initWithFrame:thumbnail];
         photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-        photo.image = note.image;
+        photo.image = [self imageThumbnail:note.image];
         [cell.contentView addSubview:photo];
     }
     
