@@ -71,7 +71,7 @@
         
         for (JLONote *note in _notes) {
             
-            /* If note is not stored:
+            /* If stored variable is set to NO (because note was just created or edited):
              * Check if some version of it is in disk and, if so, delete it
              * Set stored variable to YES and store note to disk */
             if (!note.stored) {

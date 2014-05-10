@@ -22,7 +22,7 @@ Each note contains:
 
 View Hierarchy:
 
-|---- HomeView
+|---- HomeView (note list table view display)
     |
     |---- TitleInputView
     |   |

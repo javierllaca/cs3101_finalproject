@@ -56,6 +56,8 @@
     _body.textColor = [UIColor blackColor];
     [_body setFont:[UIFont systemFontOfSize:16.0]];
     [_body sizeToFit];
+    
+    // Disable scroll of text field to avoid it from interfering with scroll view
     _body.scrollEnabled = NO;
     
     if (_note.image) {
@@ -71,6 +73,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    // If note content was updated
     if (![_note.body isEqualToString:_body.text]) {
         _note.body = _body.text;
         _note.stored = NO;
