@@ -1,14 +1,14 @@
 //
-//  JLOImageViewController.m
+//  JLOImageSelectionViewController.m
 //  Notes
 //
 //  Created by Javier Llaca on 4/23/14.
 //  Copyright (c) 2014 Llaca. All rights reserved.
 //
 
-#import "JLOImageViewController.h"
+#import "JLOImageSelectionViewController.h"
 
-@implementation JLOImageViewController
+@implementation JLOImageSelectionViewController
 
 - (id)initWithTitle:(NSString *)title Body:(NSString *)body
 {
@@ -68,22 +68,6 @@
                               initWithFrame:CGRectMake(margin, topBound, sideLength, sideLength)];
     _imageContainer.tag = IMAGE_CONTAINER_TAG;
     [self.view addSubview:_imageContainer];
-}
-
-- (void)storeNote
-{
-    JLONote *note = [[JLONote alloc] initWithTitle:_noteTitle
-                                              Body:_noteBody
-                                             Image:_image];
-    JLOHomeViewController *rootViewController = [self.navigationController.viewControllers firstObject];
-    [[rootViewController notes] addObject:note];
-    [[rootViewController tableView] reloadData];
-}
-
-- (void)done:(UIBarButtonItem *)sender
-{
-    [self storeNote];
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)takePhoto:(UIButton *)sender
@@ -146,6 +130,22 @@
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)done:(UIBarButtonItem *)sender
+{
+    [self storeNote];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)storeNote
+{
+    JLONote *note = [[JLONote alloc] initWithTitle:_noteTitle
+                                              Body:_noteBody
+                                             Image:_image];
+    JLOHomeViewController *rootViewController = [self.navigationController.viewControllers firstObject];
+    [[rootViewController notes] addObject:note];
+    [[rootViewController tableView] reloadData];
 }
 
 @end

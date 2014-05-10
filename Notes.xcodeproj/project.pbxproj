@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E137537E19048A7C00B51B7F /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = E137537919048A7C00B51B7F /* README.txt */; };
-		E148C8ED190801D600CC74B0 /* JLOTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E148C8EB190801D600CC74B0 /* JLOTitleViewController.m */; };
+		E148C8ED190801D600CC74B0 /* JLOTitleInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E148C8EB190801D600CC74B0 /* JLOTitleInputViewController.m */; };
 		E16FE06E19075EFE003E2BC5 /* JLONote.m in Sources */ = {isa = PBXBuildFile; fileRef = E16FE06D19075EFE003E2BC5 /* JLONote.m */; };
 		E1C38398190485A500A465EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C38397190485A500A465EE /* Foundation.framework */; };
 		E1C3839A190485A500A465EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C38399190485A500A465EE /* CoreGraphics.framework */; };
@@ -26,8 +26,8 @@
 		E1C383C3190485A500A465EE /* NotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383C2190485A500A465EE /* NotesTests.m */; };
 		E1C383D11904868E00A465EE /* JLOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383CD1904868E00A465EE /* JLOAppDelegate.m */; };
 		E1C383D21904868E00A465EE /* JLOHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C383CF1904868E00A465EE /* JLOHomeViewController.m */; };
-		E1EE7614190898C10015EB29 /* JLOBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE7612190898C10015EB29 /* JLOBodyViewController.m */; };
-		E1EE761919089CF40015EB29 /* JLOImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE761719089CF40015EB29 /* JLOImageViewController.m */; };
+		E1EE7614190898C10015EB29 /* JLOContentInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE7612190898C10015EB29 /* JLOContentInputViewController.m */; };
+		E1EE761919089CF40015EB29 /* JLOImageSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE761719089CF40015EB29 /* JLOImageSelectionViewController.m */; };
 		E1EE761E1908B7C20015EB29 /* JLONoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EE761C1908B7C20015EB29 /* JLONoteViewController.m */; };
 		E1F151B2191A256A00E96C65 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F151B1191A256A00E96C65 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
@@ -44,8 +44,8 @@
 
 /* Begin PBXFileReference section */
 		E137537919048A7C00B51B7F /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		E148C8EA190801D600CC74B0 /* JLOTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOTitleViewController.h; sourceTree = "<group>"; };
-		E148C8EB190801D600CC74B0 /* JLOTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOTitleViewController.m; sourceTree = "<group>"; };
+		E148C8EA190801D600CC74B0 /* JLOTitleInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOTitleInputViewController.h; sourceTree = "<group>"; };
+		E148C8EB190801D600CC74B0 /* JLOTitleInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOTitleInputViewController.m; sourceTree = "<group>"; };
 		E16FE06C19075EFE003E2BC5 /* JLONote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLONote.h; sourceTree = "<group>"; };
 		E16FE06D19075EFE003E2BC5 /* JLONote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLONote.m; sourceTree = "<group>"; };
 		E1C38394190485A500A465EE /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,10 +68,10 @@
 		E1C383CD1904868E00A465EE /* JLOAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOAppDelegate.m; sourceTree = "<group>"; };
 		E1C383CE1904868E00A465EE /* JLOHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOHomeViewController.h; sourceTree = "<group>"; };
 		E1C383CF1904868E00A465EE /* JLOHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOHomeViewController.m; sourceTree = "<group>"; };
-		E1EE7611190898C10015EB29 /* JLOBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOBodyViewController.h; sourceTree = "<group>"; };
-		E1EE7612190898C10015EB29 /* JLOBodyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOBodyViewController.m; sourceTree = "<group>"; };
-		E1EE761619089CF40015EB29 /* JLOImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOImageViewController.h; sourceTree = "<group>"; };
-		E1EE761719089CF40015EB29 /* JLOImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOImageViewController.m; sourceTree = "<group>"; };
+		E1EE7611190898C10015EB29 /* JLOContentInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOContentInputViewController.h; sourceTree = "<group>"; };
+		E1EE7612190898C10015EB29 /* JLOContentInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOContentInputViewController.m; sourceTree = "<group>"; };
+		E1EE761619089CF40015EB29 /* JLOImageSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLOImageSelectionViewController.h; sourceTree = "<group>"; };
+		E1EE761719089CF40015EB29 /* JLOImageSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLOImageSelectionViewController.m; sourceTree = "<group>"; };
 		E1EE761B1908B7C20015EB29 /* JLONoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLONoteViewController.h; sourceTree = "<group>"; };
 		E1EE761C1908B7C20015EB29 /* JLONoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLONoteViewController.m; sourceTree = "<group>"; };
 		E1F151B1191A256A00E96C65 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -144,12 +144,12 @@
 				E1C383CD1904868E00A465EE /* JLOAppDelegate.m */,
 				E1C383CE1904868E00A465EE /* JLOHomeViewController.h */,
 				E1C383CF1904868E00A465EE /* JLOHomeViewController.m */,
-				E148C8EA190801D600CC74B0 /* JLOTitleViewController.h */,
-				E148C8EB190801D600CC74B0 /* JLOTitleViewController.m */,
-				E1EE7611190898C10015EB29 /* JLOBodyViewController.h */,
-				E1EE7612190898C10015EB29 /* JLOBodyViewController.m */,
-				E1EE761619089CF40015EB29 /* JLOImageViewController.h */,
-				E1EE761719089CF40015EB29 /* JLOImageViewController.m */,
+				E148C8EA190801D600CC74B0 /* JLOTitleInputViewController.h */,
+				E148C8EB190801D600CC74B0 /* JLOTitleInputViewController.m */,
+				E1EE7611190898C10015EB29 /* JLOContentInputViewController.h */,
+				E1EE7612190898C10015EB29 /* JLOContentInputViewController.m */,
+				E1EE761619089CF40015EB29 /* JLOImageSelectionViewController.h */,
+				E1EE761719089CF40015EB29 /* JLOImageSelectionViewController.m */,
 				E16FE06C19075EFE003E2BC5 /* JLONote.h */,
 				E16FE06D19075EFE003E2BC5 /* JLONote.m */,
 				E1EE761B1908B7C20015EB29 /* JLONoteViewController.h */,
@@ -289,12 +289,12 @@
 			files = (
 				E1C383D11904868E00A465EE /* JLOAppDelegate.m in Sources */,
 				E1EE761E1908B7C20015EB29 /* JLONoteViewController.m in Sources */,
-				E1EE7614190898C10015EB29 /* JLOBodyViewController.m in Sources */,
-				E1EE761919089CF40015EB29 /* JLOImageViewController.m in Sources */,
+				E1EE7614190898C10015EB29 /* JLOContentInputViewController.m in Sources */,
+				E1EE761919089CF40015EB29 /* JLOImageSelectionViewController.m in Sources */,
 				E16FE06E19075EFE003E2BC5 /* JLONote.m in Sources */,
 				E1C383AD190485A500A465EE /* Notes.xcdatamodeld in Sources */,
 				E1C383D21904868E00A465EE /* JLOHomeViewController.m in Sources */,
-				E148C8ED190801D600CC74B0 /* JLOTitleViewController.m in Sources */,
+				E148C8ED190801D600CC74B0 /* JLOTitleInputViewController.m in Sources */,
 				E1C383A6190485A500A465EE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

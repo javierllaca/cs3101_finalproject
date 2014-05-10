@@ -16,6 +16,10 @@
 @property (strong, nonatomic) UIImage   *image;
 @property BOOL stored;
 
+// Custom contructor
 - (id)initWithTitle:(NSString *)title Body:(NSString *)body Image:(UIImage *)image;
+
+// Returns a string with title, body, and date of image
+- (NSString *)description;
 
 @end

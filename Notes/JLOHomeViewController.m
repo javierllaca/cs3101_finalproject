@@ -13,6 +13,8 @@
 - (id)init
 {
     self = [super init];
+    if (self)
+        _notes = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -24,9 +26,34 @@
     [_tableView setRowHeight:CELL_HEIGHT];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _notes = [[NSMutableArray alloc] init];
     [self.view addSubview:_tableView];
     [self loadStoredNotes];
+}
+
+// Load notes from disk
+- (void)loadStoredNotes
+{
+    @autoreleasepool {
+        JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context]];
+        [request setPredicate:nil];
+        
+        NSError *error;
+        NSArray *objects = [context executeFetchRequest:request error:&error];
+        
+        NSManagedObject *matches = nil;
+        if ([objects count] != 0) {
+            for (int i = 0; i < [objects count]; i++) {
+                matches = objects[i];
+                NSData *data = [matches valueForKey:@"note"];
+                JLONote *note = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                [self.notes addObject:note];
+            }
+        }
+    }
 }
 
 - (void)viewDidLoad
@@ -38,37 +65,43 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated
-{    
+{
+    // Concurrently store unstored notes to disk
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         for (JLONote *note in _notes) {
+            
+            /* If note is not stored:
+             * Check if some version of it is in disk and, if so, delete it
+             * Set stored variable to YES and store note to disk */
             if (!note.stored) {
-                NSLog(@"%@", note);
-                
-                // Store in core data
-                JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-                NSManagedObjectContext *context = [appDelegate managedObjectContext];
-                
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date == %@)", note.date];
-                NSFetchRequest *request = [[NSFetchRequest alloc] init];
-                [request setEntity:[NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context]];
-                [request setPredicate:predicate];
-                
-                NSError *error = nil;
-                NSArray *results = [context executeFetchRequest:request error:&error];
-                
-                if ([results count] != 0)
-                    [context deleteObject:[results firstObject]];
-                
-                NSManagedObject *newContact;
-                newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Notes" inManagedObjectContext:context];
-                
-                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:note];
-                [newContact setValue:data forKey:@"note"];
-                [newContact setValue:note.date forKey:@"date"];
-                
-                [context save:&error];
-                
-                note.stored = YES;
+                @autoreleasepool {
+                    JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+                    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+                    
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date == %@)", note.date];
+                    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+                    [request setEntity:[NSEntityDescription entityForName:@"Notes"
+                                                   inManagedObjectContext:context]];
+                    [request setPredicate:predicate];
+                    
+                    NSError *error = nil;
+                    NSArray *results = [context executeFetchRequest:request error:&error];
+                    
+                    if ([results count] != 0)
+                        [context deleteObject:[results firstObject]];
+                    
+                    NSManagedObject *newContact;
+                    newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Notes"
+                                                               inManagedObjectContext:context];
+                    
+                    note.stored = YES;
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:note];
+                    [newContact setValue:data forKey:@"note"];
+                    [newContact setValue:note.date forKey:@"date"];
+                    
+                    [context save:&error];
+                }
             }
         }
     });
@@ -97,30 +130,6 @@
     self.navigationItem.leftBarButtonItem = edit;
 }
 
-// Load from core data
-- (void)loadStoredNotes
-{
-    JLOAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"Notes" inManagedObjectContext:context]];
-    [request setPredicate:nil];
-    
-    NSError *error;
-    NSArray *objects = [context executeFetchRequest:request error:&error];
-    
-    NSManagedObject *matches = nil;
-    if ([objects count] != 0) {
-        for (int i = 0; i < [objects count]; i++) {
-            matches = objects[i];
-            NSData *data = [matches valueForKey:@"note"];
-            JLONote *note = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            [self.notes addObject:note];
-        }
-    }
-}
-
 // deletes note from core data
 - (void)deleteNote:(JLONote *)note
 {
@@ -143,7 +152,7 @@
 
 - (void)addNote:(UIBarButtonItem *)sender
 {
-    JLOTitleViewController *titleVC = [[JLOTitleViewController alloc] init];
+    JLOTitleInputViewController *titleVC = [[JLOTitleInputViewController alloc] init];
     [self.navigationController pushViewController:titleVC animated:YES];
 }
 
@@ -181,26 +190,26 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     return _notes.count;
 }
 
--(UIImage*)imageThumbnail:(UIImage *)original
+- (UIImage*)imageThumbnail:(UIImage *)image
 {
     double width, height, originX, originY;
-    if (original.size.width > original.size.height) {
-        width = height = original.size.height;
-        originX = (original.size.width - height) / 2;
+    if (image.size.width > image.size.height) {
+        width = height = image.size.height;
+        originX = (image.size.width - height) / 2;
         originY = 0;
     } else {
-        width = height = original.size.width;
+        width = height = image.size.width;
         originX = 0;
-        originY = (original.size.height - width) / 2;
+        originY = (image.size.height - width) / 2;
     }
     
     CGRect cropSquare = CGRectMake(originX, originY, width, height);
-    CGImageRef imageRef = CGImageCreateWithImageInRect([original CGImage], cropSquare);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropSquare);
     
-    UIImage *cropped = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:original.imageOrientation];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:image.imageOrientation];
     CGImageRelease(imageRef);
     
-    return cropped;
+    return thumbnail;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -225,7 +234,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     if (note.image) {
         double margin = 5.0;
         double sideLength = CELL_HEIGHT - 2 * margin;
-        CGRect thumbnail = CGRectMake(self.view.frame.size.width - margin - sideLength, margin, sideLength, sideLength);
+        CGRect thumbnail = CGRectMake(self.view.frame.size.width - margin - sideLength,
+                                      margin, sideLength, sideLength);
         photo = [[UIImageView alloc]initWithFrame:thumbnail];
         photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         photo.image = [self imageThumbnail:note.image];

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JLOTitleViewController.h"
+#import "JLOTitleInputViewController.h"
 #import "JLONoteViewController.h"
 #import "JLOAppDelegate.h"
 
@@ -19,10 +19,20 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *notes;
 
-// retrieve stored notes using core data
+// Load notes from disk
 - (void)loadStoredNotes;
 
-// add note to list
+// Setup edit and add note button in navigation bar
+- (void)setNavigationBarButtons;
+
+// Delete note from disk
+- (void)deleteNote:(JLONote *)note;
+
+// Add note to list
 - (void)addNote:(UIBarButtonItem *)sender;
+
+// Returns a square subsection from center of image to be used as a thumbnail
+- (UIImage*)imageThumbnail:(UIImage *)image;
+
 
 @end

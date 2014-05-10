@@ -17,6 +17,13 @@
 @property (strong, nonatomic) UITextView *body;
 @property (strong, nonatomic) UIImageView *image;
 
+// Custom constructor
 - (id)initWithNote:(JLONote *)note;
+
+// Adds a square image container to view
+- (void)setImageContainer;
+
+// Modally presents a view controller to send note via email
+- (IBAction)email:(id)sender;
 
 @end

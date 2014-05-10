@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JLOHomeViewController.h"
 
 @interface JLOAppDelegate : UIResponder <UIApplicationDelegate>
 

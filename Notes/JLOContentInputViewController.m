@@ -1,15 +1,14 @@
 //
-//  JLOBodyViewController.m
+//  JLOContentInputViewController.m
 //  Notes
 //
 //  Created by Javier Llaca on 4/23/14.
 //  Copyright (c) 2014 Llaca. All rights reserved.
 //
 
-#import "JLOBodyViewController.h"
-#import "JLOImageViewController.h"
+#import "JLOContentInputViewController.h"
 
-@implementation JLOBodyViewController
+@implementation JLOContentInputViewController
 
 - (id)initWithTitle:(NSString *)title
 {
@@ -28,7 +27,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"Content";
-    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Picture"
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(nextButtonPressed:)];
@@ -55,7 +54,7 @@
 
 - (void)nextButtonPressed:(UIBarButtonItem *)sender
 {
-    JLOImageViewController *imageVC = [[JLOImageViewController alloc] initWithTitle:_noteTitle
+    JLOImageSelectionViewController *imageVC = [[JLOImageSelectionViewController alloc] initWithTitle:_noteTitle
                                                                                Body:_noteBody.text];
     [self.navigationController pushViewController:imageVC animated:YES];
 }

@@ -31,6 +31,7 @@
         self.body = [aDecoder decodeObjectForKey:@"body"];
         self.date = [aDecoder decodeObjectForKey:@"date"];
         self.image = [aDecoder decodeObjectForKey:@"image"];
+        self.stored = YES;
     }
     return self;
 }

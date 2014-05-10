@@ -7,7 +7,6 @@
 //
 
 #import "JLOAppDelegate.h"
-#import "JLOHomeViewController.h"
 
 @implementation JLOAppDelegate
 
@@ -30,7 +29,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
 

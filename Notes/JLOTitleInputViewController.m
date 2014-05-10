@@ -1,15 +1,14 @@
 //
-//  JLOTitleViewController.m
+//  JLOTitleInputViewController.m
 //  Notes
 //
 //  Created by Javier Llaca on 4/23/14.
 //  Copyright (c) 2014 Llaca. All rights reserved.
 //
 
-#import "JLOTitleViewController.h"
-#import "JLOBodyViewController.h"
+#import "JLOTitleInputViewController.h"
 
-@implementation JLOTitleViewController
+@implementation JLOTitleInputViewController
 
 - (id)init
 {
@@ -25,7 +24,7 @@
     
     self.title = @"Title";
     UIBarButtonItem *nextButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Content"
+                                   initWithTitle:@"Next"
                                    style:UIBarButtonItemStylePlain
                                    target:self
                                    action:@selector(nextButtonPressed:)];
@@ -54,8 +53,7 @@
 
 - (void)nextButtonPressed:(UIBarButtonItem *)sender
 {
-    JLOBodyViewController *bodyVC = [[JLOBodyViewController alloc] initWithTitle:_noteTitle.text];
-    //[bodyVC setTitle:self.textField.text];
+    JLOContentInputViewController *bodyVC = [[JLOContentInputViewController alloc] initWithTitle:_noteTitle.text];
     [self.navigationController pushViewController:bodyVC animated:YES];
 }
 
